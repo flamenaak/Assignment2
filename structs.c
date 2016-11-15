@@ -5,14 +5,21 @@
  *      Author: vladko
  */
 
-struct Object{
-	char ch ;
-	char name[30];
-	char student_number[6];
-	struct Object* next;
-};
+typedef struct node{
+	void * element;
+	struct node* next;
+} node_t;
 
-struct LinkedList{
-	struct Object root;
-};
+typedef struct person{
+	char type;
+	char first_name[20];
+	char number[6];
 
+} person_t;
+
+typedef struct subject{
+	char type;
+	char name[10];
+	char course_number[6];
+	char semester_number;
+}subject_t;
