@@ -17,9 +17,15 @@ typedef struct person{
 
 } person_t;
 
-typedef struct subject{
+typedef struct course{
 	char type;
 	char name[10];
-	char course_number[6];
+	char course_number[2];
 	char semester_number;
 }subject_t;
+
+typedef struct enrol{
+	char type;
+	char person_number[6];
+	char course_number[2];
+}enrol_t;

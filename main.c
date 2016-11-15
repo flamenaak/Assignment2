@@ -12,6 +12,8 @@
 #include <string.h>
 
 void addToList(node_t * head, void * val);
+void removeFromList(int i, node_t* head);
+int listSize(node_t* head);
 person_t* newStudent();
 person_t* newSubject();
 person_t* newTeacher();
@@ -23,18 +25,27 @@ int main() {
 
 	person_t *s1 = newStudent();
 	person_t *s2 = newStudent();
+	person_t *s3 = newStudent();
+	person_t *s4 = newStudent();
 
 	node_t *head1 = newNode();
 
 	strcpy(s1->first_name, "Vlado");
 	strcpy(s2->first_name, "Doms");
+	strcpy(s3->first_name, "Andrej");
+	strcpy(s4->first_name, "Kubo");
 
 	if(head1->next == 0)
 		printf("this is correct \n");
 
-
 	addToList(head1, s1);
 	addToList(head1, s2);
+	addToList(head1, s3);
+	addToList(head1, s4);
+
+	removeFromList(1, head1);
+	removeFromList(1, head1);
+	removeFromList(1, head1);
 
 	if(head1->element == 0)
 				printf("this is correct \n");
@@ -70,6 +81,36 @@ void addToList(node_t * head, void * item) {
 	node_t * n = newNode();
 	n->element = item;
 	current->next = n;
+}
+
+void removeFromList(int i, node_t* head)
+{
+	if(i == 0){
+		printf("do not remove head");
+		return;
+	}
+	int count= 0;
+	node_t * cur = head;
+	while(count < i-1 && cur!=0)
+	{
+		cur = cur->next;
+		count++;
+	}
+	node_t* tmp = cur->next->next;
+	free(cur->next);
+	cur->next = tmp ;
+}
+
+int listSize(node_t* head)
+{
+	int size = 0;
+	node_t*cur = head;
+	while(cur != 0)
+	{
+		cur = cur->next;
+		size++;
+	}
+	return size;
 }
 
 person_t* newStudent() {
