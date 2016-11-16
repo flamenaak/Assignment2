@@ -12,13 +12,16 @@
 
 typedef struct dbreader
 {
-	node_t *sList = newNode();
-	node_t *tList = newNode();
-	node_t *cList = newNode();
-	node_t *aList = newNode();
-	node_t *eList = newNode();
+	node_t *sList;
+	node_t *tList;
+	node_t *cList;
+	node_t *aList;
+	node_t *eList;
 } dbreader_t;
 
+node_t* findCbyNum(char cNum[], dbreader_t* db);
+node_t* findCbyNum(char cNum[], dbreader_t* db);
+int removeStudent(char snum[], dbreader_t*db);
 
 #endif /* DBREADER_H_ */
 

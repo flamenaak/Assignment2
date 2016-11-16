@@ -15,5 +15,6 @@
 #include "course.h"
 #include "DBReader.h"
 #include "enrol.h"
+#include <string.h>
 
 #endif /* MODEL_H_ */
