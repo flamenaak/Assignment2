@@ -73,18 +73,21 @@ node_t* findSbyName(char name[], dbreader_t* db) {
 node_t* findCbySNum(char stNum[], dbreader_t* db) {
 	node_t*cur = db->eList;
 	enrol_t *p;
+	node_t* list = newNode();
 
 	while (cur != 0) {
 		if (cur->element != 0) {
 			p = (enrol_t*) cur->element;
 			if (p->person_number == stNum && p->type == 'E')
-				return findCbyNum(p->course_number, db);
+				addToList(list, findCbyNum(p->course_number, db));
 		}
 	}
-	return 0;
+	return list;
 }
 
 node_t* findCbyTNum(char stNum[], dbreader_t* db) {
+	node_t* list = newNode();
+
 	node_t*cur = db->eList;
 	enrol_t *p;
 
@@ -92,10 +95,10 @@ node_t* findCbyTNum(char stNum[], dbreader_t* db) {
 		if (cur->element != 0) {
 			p = (enrol_t*) cur->element;
 			if (p->person_number == stNum && p->type == 'A')
-				return findCbyNum(p->course_number, db);
+				addToList(list,findCbyNum(p->course_number, db));
 		}
 	}
-	return 0;
+	return list;
 }
 
 node_t* findCbyNum(char cNum[], dbreader_t* db) {
