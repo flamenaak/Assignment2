@@ -14,7 +14,7 @@ typedef struct person{
 	char number[6];
 
 } person_t;
-person_t* newStudent();
-person_t* newTeacher();
+person_t* newStudent(char name[], char number[]);
+person_t* newTeacher(char name[], char number[]);
 
 #endif /* PERSON_H_ */

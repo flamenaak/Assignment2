@@ -14,6 +14,8 @@ typedef struct course{
 	char course_number[2];
 	char semester_number;
 }course_t;
-newCourse();
+
+//course_t* newCourse();
+course_t* newCourse(char [], char [], char );
 
 #endif /* COURSE_H_ */

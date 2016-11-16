@@ -18,17 +18,12 @@ int main() {
 	struct Node *head = NULL;
 	head = malloc(sizeof(head));
 
-	person_t *s1 = newStudent();
-	person_t *s2 = newStudent();
-	person_t *s3 = newStudent();
-	person_t *s4 = newStudent();
+	person_t *s1 = newStudent("Vlado", "123456");
+	person_t *s2 = newStudent("Doms", "123654");
+	person_t *s3 = newStudent("Kubo" , "987654");
+	person_t *s4 = newStudent("Another", "6946");
 
 	node_t *head1 = newNode();
-
-	strcpy(s1->first_name, "Vlado");
-	strcpy(s2->first_name, "Doms");
-	strcpy(s3->first_name, "Andrej");
-	strcpy(s4->first_name, "Kubo");
 
 	if(head1->next == 0)
 		printf("this is correct \n");
