@@ -7,7 +7,11 @@
 
 #include "dbreader.h"
 
-int newDBReader(FILE *fp) {
+void enrolStudent(person_t*person, course_t*course, dbreader_t* db);
+
+dbreader_t* newDBReader(FILE *fp) {
+
+	dbreader_t* db = (dbreader_t*)malloc(sizeof(dbreader_t));
 	char buff[255];
 	char c;
 	char numberP[6];
@@ -15,36 +19,36 @@ int newDBReader(FILE *fp) {
 	char name[100];
 	char semNumber;
 
-	node_t*sList = newNode();
-	node_t*tList = newNode();
-	node_t*cList = newNode();
-	node_t*eList = newNode();
-	node_t*aList = newNode();
+	db->sList = newNode();
+	db->tList = newNode();
+	db->cList = newNode();
+	db->eList = newNode();
+	db->aList = newNode();
 
 	//fp = fopen("C:/Users/Dominik/Cworkspace/tmp/DB.txt", "r");
 
-	while (!(fgets(buff, 255, (FILE*) fp) == NULL)) {
+	while (!(fgets(buff, 255, (FILE*) fp) == 0)) {
 		sscanf(buff, "%c ", &c);
 		if (c == 'S') {
 			sscanf(buff, "%c %s %s", &c, numberP, name);
 			person_t *student = newStudent(name, numberP);
-			addToList(sList, student);
+			addToList(db->sList, student);
 		} else if (c == 'T') {
 			sscanf(buff, "%c %s %s", &c, numberP, name);
 			person_t *teacher = newTeacher(name, numberP);
-			addToList(tList, teacher);
+			addToList(db->tList, teacher);
 		} else if (c == 'C') {
 			sscanf(buff, "%c %s %s %c", &c, numberC, name, semNumber);
 			course_t *course = newCourse(name, numberC, semNumber);
-			addToList(cList, course);
+			addToList(db->cList, course);
 		} else if (c == 'A') {
 			sscanf(buff, "%c %s %s", &c, numberP, numberC);
 			enrol_t *teacherE = enrol(numberP, numberC);
-			addToList(aList, teacherE);
+			addToList(db->aList, teacherE);
 		} else if (c == 'E') {
 			sscanf(buff, "%c %s %s", &c, numberP, numberC);
 			enrol_t *studentE = enrol(numberP, numberC);
-			addToList(eList, studentE);
+			addToList(db->eList, studentE);
 		}
 		/*
 		 sscanf(buff, "%c %s %s", &c, number, name);
@@ -54,7 +58,7 @@ int newDBReader(FILE *fp) {
 
 	fclose(fp);
 
-	return 0;
+	return db;
 
 }
 

@@ -5,13 +5,7 @@
  *      Author: vladko
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "person.h"
-#include "course.h"
-#include "enrol.h"
-#include "node.h"
+#include "model.h"
 
 
 int main() {
