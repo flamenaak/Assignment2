@@ -7,58 +7,62 @@
 
 #include "model.h"
 
-
 int main() {
 	struct Node *head = NULL;
 	head = malloc(sizeof(head));
 	node_t * current;
 
-	person_t *s1 = newStudent("Vlado", "123456");
-	person_t *s2 = newStudent("Doms", "123654");
-	person_t *s3 = newStudent("Kubo" , "987654");
-	person_t *s4 = newStudent("Another", "6946");
+	FILE *fp;
+	fp = fopen("C:/Users/Dominik/Cworkspace/tmp/DB.txt", "r");
 
-	node_t *head1 = newNode();
+	dbreader_t *reader = newDBReader(fp);
 
-	if(head1->next == 0)
-		printf("this is correct \n");
+	/*person_t *s1 = newStudent("Vlado", "123456");
+	 person_t *s2 = newStudent("Doms", "123654");
+	 person_t *s3 = newStudent("Kubo" , "987654");
+	 person_t *s4 = newStudent("Another", "6946");
 
-	addToList(head1, s1);
-	addToList(head1, s2);
-	addToList(head1, s3);
-	addToList(head1, s4);
+	 node_t *head1 = newNode();
 
-	current = get(2, head1);
-	person_t * p = (person_t*)current->element;
-			printf("Name :%s\n", p->first_name);
+	 if(head1->next == 0)
+	 printf("this is correct \n");
 
-	removeFromList(1, head1);
-	removeFromList(1, head1);
-	removeFromList(1, head1);
+	 addToList(head1, s1);
+	 addToList(head1, s2);
+	 addToList(head1, s3);
+	 addToList(head1, s4);
 
-	if(head1->element == 0)
-				printf("this is correct \n");
+	 current = get(2, head1);
+	 person_t * p = (person_t*)current->element;
+	 printf("Name :%s\n", p->first_name);
 
+	 removeFromList(1, head1);
+	 removeFromList(1, head1);
+	 removeFromList(1, head1);
 
-	current = head1;
-	if(current->element == 0)
-					printf("this is correct \n");
-
-	while(current != 0)
-	{
-		if(current->element != 0){
-		person_t * p = (person_t*)current->element;
-		printf("Name :%s\n", p->first_name);
-		}
-		else
-			printf("skipped\n");
-
-		current = current->next;
-	}
+	 if(head1->element == 0)
+	 printf("this is correct \n");
 
 
-	printf("it is done");
-	}
+	 current = head1;
+	 if(current->element == 0)
+	 printf("this is correct \n");
+
+	 while(current != 0)
+	 {
+	 if(current->element != 0){
+	 person_t * p = (person_t*)current->element;
+	 printf("Name :%s\n", p->first_name);
+	 }
+	 else
+	 printf("skipped\n");
+
+	 current = current->next;
+	 }
 
 
+	 printf("it is done");
+	 }
+	 */
+}
 
