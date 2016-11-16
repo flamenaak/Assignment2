@@ -72,14 +72,3 @@ node_t* get(int i, node_t*head)
 	return cur;
 }
 
-int find(void* att, head)
-{
-	node_t*cur = head;
-	int count = 0;
-	while(cur != 0)
-	{
-		if()
-		cur = cur->next;
-	}
-	return -1;
-}
