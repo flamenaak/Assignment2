@@ -131,3 +131,9 @@ int removeStudent(char snum[], dbreader_t*db) {
 	return 0;
 }
 
+void enrolStudent(person_t*person, course_t*course, dbreader_t* db)
+{
+	enrol_t*e = enrol(person, course);
+	if(person->number!= 0 && course->course_number != 0)
+	addToList((node_t*)db->eList,e);
+}
