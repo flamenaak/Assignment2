@@ -67,18 +67,4 @@ int main() {
 	}
 
 
-course_t* newSubject() {
-	person_t *subject;
-	subject = (person_t*) malloc(sizeof(person_t));
-	subject->type = 'C';
-	return subject;
-}
-
-node_t* newNode() {
-	node_t * node;
-	node = (node_t*) malloc(sizeof(node_t));
-	node->next = 0;
-	node->element =0;
-	return node;
-}
 

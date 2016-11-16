@@ -7,7 +7,13 @@
 #include "node.h"
 #include <stdio.h>
 
-
+node_t* newNode() {
+	node_t * node;
+	node = (node_t*) malloc(sizeof(node_t));
+	node->next = 0;
+	node->element =0;
+	return node;
+}
 
 void addToList(node_t * head, void * item) {
 	node_t * current = head;
