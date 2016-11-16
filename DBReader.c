@@ -38,7 +38,7 @@ dbreader_t* newDBReader(FILE *fp) {
 			person_t *teacher = newTeacher(name, numberP);
 			addToList(db->tList, teacher);
 		} else if (c == 'C') {
-			sscanf(buff, "%c %s %s %c", &c, numberC, name, semNumber);
+			sscanf(buff, "%c %s %s %c", &c, numberC, name, &semNumber);
 			course_t *course = newCourse(name, numberC, semNumber);
 			addToList(db->cList, course);
 		} else if (c == 'A') {
@@ -163,7 +163,7 @@ node_t* findStudentsByCourse(char Cnum[], dbreader_t* db)
         enrol_t* e = (enrol_t*)cur->element;
         if(cour->course_number == e->course_number)
         {
-          addToList(tempList, findSbyNum(e->person_number));
+          addToList(tempList, findSbyNum(e->person_number, db));
         }
 
       }
@@ -194,7 +194,7 @@ node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
         enrol_t* a = (enrol_t*)cur->element;
         if(cour->course_number == a->course_number)
         {
-          addToList(tempList, findSbyNum(a->person_number));
+          addToList(tempList, findSbyNum(a->person_number, db));
         }
 
       }
@@ -202,4 +202,18 @@ node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
     return tempList;
   }
   return 0;
+}
+
+person_t* findSbyNum(char number[], dbreader_t* db){
+	node_t* cur = db->sList;
+	while(cur != 0){
+		if(cur->element != 0)
+		{
+			person_t*p = (person_t*)cur->element;
+			if(p->number == number)
+				return p;
+			cur = cur->next;
+		}
+	}
+	return 0;
 }

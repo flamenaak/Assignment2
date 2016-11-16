@@ -7,7 +7,7 @@
 
 #include "model.h"
 
-int main() {
+/*int main() {
 	struct Node *head = NULL;
 	head = malloc(sizeof(head));
 	node_t * current;
@@ -17,7 +17,7 @@ int main() {
 
 	dbreader_t *reader = newDBReader(fp);
 
-	/*person_t *s1 = newStudent("Vlado", "123456");
+	/person_t *s1 = newStudent("Vlado", "123456");
 	 person_t *s2 = newStudent("Doms", "123654");
 	 person_t *s3 = newStudent("Kubo" , "987654");
 	 person_t *s4 = newStudent("Another", "6946");
@@ -63,6 +63,6 @@ int main() {
 
 	 printf("it is done");
 	 }
-	 */
-}
+
+}*/
 
