@@ -7,17 +7,12 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "structs.c"
-#include "methods.h"
 #include <string.h>
+#include "person.h"
+#include "course.h"
+#include "enrol.h"
+#include "node.h"
 
-void addToList(node_t * head, void * val);
-void removeFromList(int i, node_t* head);
-int listSize(node_t* head);
-person_t* newStudent();
-person_t* newSubject();
-person_t* newTeacher();
-node_t* newNode();
 
 int main() {
 	struct Node *head = NULL;
@@ -72,62 +67,7 @@ int main() {
 	}
 
 
-void addToList(node_t * head, void * item) {
-	node_t * current = head;
-	while (current->next != NULL) {
-		current = current->next;
-	}
-
-	node_t * n = newNode();
-	n->element = item;
-	current->next = n;
-}
-
-void removeFromList(int i, node_t* head)
-{
-	if(i == 0){
-		printf("do not remove head");
-		return;
-	}
-	int count= 0;
-	node_t * cur = head;
-	while(count < i-1 && cur!=0)
-	{
-		cur = cur->next;
-		count++;
-	}
-	node_t* tmp = cur->next->next;
-	free(cur->next);
-	cur->next = tmp ;
-}
-
-int listSize(node_t* head)
-{
-	int size = 0;
-	node_t*cur = head;
-	while(cur != 0)
-	{
-		cur = cur->next;
-		size++;
-	}
-	return size;
-}
-
-person_t* newStudent() {
-	person_t *student;
-	student = (person_t*) malloc(sizeof(person_t));
-	student->type = 'S';
-	return student;
-}
-
-person_t* newTeacher() {
-	person_t *teacher;
-	teacher = (person_t*) malloc(sizeof(person_t));
-	teacher->type = 'T';
-	return teacher;
-}
-
-person_t* newSubject() {
+course_t* newSubject() {
 	person_t *subject;
 	subject = (person_t*) malloc(sizeof(person_t));
 	subject->type = 'C';
