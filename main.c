@@ -17,6 +17,7 @@
 int main() {
 	struct Node *head = NULL;
 	head = malloc(sizeof(head));
+	node_t * current;
 
 	person_t *s1 = newStudent("Vlado", "123456");
 	person_t *s2 = newStudent("Doms", "123654");
@@ -33,6 +34,10 @@ int main() {
 	addToList(head1, s3);
 	addToList(head1, s4);
 
+	current = get(2, head1);
+	person_t * p = (person_t*)current->element;
+			printf("Name :%s\n", p->first_name);
+
 	removeFromList(1, head1);
 	removeFromList(1, head1);
 	removeFromList(1, head1);
@@ -40,7 +45,7 @@ int main() {
 	if(head1->element == 0)
 				printf("this is correct \n");
 
-	node_t * current;
+
 	current = head1;
 	if(current->element == 0)
 					printf("this is correct \n");

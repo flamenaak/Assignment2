@@ -16,5 +16,6 @@ node_t* newNode();
 void addToList(node_t * head, void * val);
 void removeFromList(int i, node_t* head);
 int listSize(node_t* head);
+node_t* get(int i, node_t* head);
 
 #endif /* NODE_H_ */

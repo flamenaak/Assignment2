@@ -6,6 +6,7 @@
  */
 #include "node.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 node_t* newNode() {
 	node_t * node;
@@ -54,4 +55,31 @@ int listSize(node_t* head)
 		size++;
 	}
 	return size;
+}
+
+node_t* get(int i, node_t*head)
+{
+	if(head == 0)
+		return 0;
+	int count =0;
+	node_t * cur = head;
+	while (count < i)
+	{
+		cur = cur->next;
+		count ++;
+	}
+
+	return cur;
+}
+
+int find(void* att, head)
+{
+	node_t*cur = head;
+	int count = 0;
+	while(cur != 0)
+	{
+		if()
+		cur = cur->next;
+	}
+	return -1;
 }
