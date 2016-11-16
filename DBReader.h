@@ -8,7 +8,7 @@
 #ifndef DBREADER_H_
 #define DBREADER_H_
 
-#include "node.h"
+#include "model.h"
 
 typedef struct dbreader
 {

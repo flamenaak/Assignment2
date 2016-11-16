@@ -36,3 +36,9 @@ int main()
 	return 0;
 
 }
+
+person_t* findSName(char name[]){
+
+}
+
+
