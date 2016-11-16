@@ -137,3 +137,65 @@ void enrolStudent(person_t*person, course_t*course, dbreader_t* db)
 	if(person->number!= 0 && course->course_number != 0)
 	addToList((node_t*)db->eList,e);
 }
+
+node_t* findStudentsByCourse(char Cnum[], dbreader_t* db)
+{
+  course_t*cour = findCbyNum(Cnum, db);
+  node_t* cur = db->eList;
+  node_t* tempList = newNode();
+
+  if(cour == 0)
+  {
+    return 0;
+  }
+  else
+  {
+    while(cur != 0)
+    {
+      //compare student with our course
+      if(cur->element != 0)
+      {
+        //compare and add to the tempList
+        enrol_t* e = (enrol_t*)cur->element;
+        if(cour->course_number == e->course_number)
+        {
+          addToList(tempList, findSbyNum(e->person_number));
+        }
+
+      }
+    }
+    return tempList;
+  }
+  return 0;
+}
+
+node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
+{
+  course_t*cour = findCbyNum(Cnum, db);
+  node_t* cur = db->aList;
+  node_t* tempList = newNode();
+
+  if(cour == 0)
+  {
+    return 0;
+  }
+  else
+  {
+    while(cur != 0)
+    {
+      //compare student with our course
+      if(cur->element != 0)
+      {
+        //compare and add to the tempList
+        enrol_t* a = (enrol_t*)cur->element;
+        if(cour->course_number == a->course_number)
+        {
+          addToList(tempList, findSbyNum(a->person_number));
+        }
+
+      }
+    }
+    return tempList;
+  }
+  return 0;
+}
