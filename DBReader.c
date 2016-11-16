@@ -12,6 +12,10 @@ int newDBReader(FILE *fp)
 {
 	char buff[255];
 	char c;
+	char numberP[6];
+	char numberC[6];
+	char name[100];
+	char semNumber;
 	dbreader_t *s = newDBReader();
 
 	//fp = fopen("C:/Users/Dominik/Cworkspace/tmp/DB.txt", "r");
@@ -21,24 +25,33 @@ int newDBReader(FILE *fp)
 		sscanf(buff, "%c ", &c);
 		if(c=='S')
 		{
-
-			s->sList = buff;
+			sscanf(buff, "%c %s %s", &c, numberP, name);
+			person_t *student = newStudent(name, numberP);
+			s->sList = student;
 		}
-		else if(c=='T')
+		else if (c == 'T')
 		{
-			s->tList = buff;
+			sscanf(buff, "%c %s %s", &c, numberP, name);
+			person_t *teacher = newTeacher(name, numberP);
+			s->tList = teacher;
 		}
 		else if(c=='C')
 		{
-			s->cList = buff;
+			sscanf(buff, "%c %s %s %c", &c, numberC, name, semNumber);
+			course_t *course = newCourse(name, numberC, semNumber);
+			s->cList = course;
 		}
 		else if(c=='A')
 		{
-			s->aList = buff;
+			sscanf(buff, "%c %s %s", &c, numberP, numberC);
+			enrol_t *teacherE = newEnrol(numberP, numberC);
+			s->aList = teacherE;
 		}
 		else if(c=='E')
 		{
-			s->eList = buff;
+			sscanf(buff, "%c %s %s", &c, numberP, numberC);
+			enrol_t *studentE = newEnrol(numberP, numberC);
+			s->eList = studentE;
 		}
 		/*
 		sscanf(buff, "%c %s %s", &c, number, name);
@@ -51,9 +64,3 @@ int newDBReader(FILE *fp)
 	return 0;
 
 }
-
-person_t* findSName(char name[]){
-
-}
-
-
