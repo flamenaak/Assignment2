@@ -8,6 +8,8 @@
 #ifndef COURSE_H_
 #define COURSE_H_
 
+#include "model.h"
+
 typedef struct course{
 	char type;
 	char name[10];

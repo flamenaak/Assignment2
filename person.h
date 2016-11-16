@@ -5,6 +5,8 @@
  *      Author: vladko
  */
 
+#include "model.h"
+
 #ifndef PERSON_H_
 #define PERSON_H_
 

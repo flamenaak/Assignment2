@@ -5,6 +5,7 @@
  *      Author: vladko
  */
 
+#include "model.h"
 
 #ifndef NODE_H_
 #define NODE_H_

@@ -8,23 +8,38 @@
 #include <stdio.h>
 #include "dbreader.h"
 
-int main()
+int newDBReader(FILE *fp)
 {
-	FILE *fp;
 	char buff[255];
+	char c;
 	dbreader_t *s = newDBReader();
-	dbreader_t *t = newDBReader();
-	dbreader_t *c = newDBReader();
-	dbreader_t *a = newDBReader();
-	dbreader_t *e = newDBReader();
 
-	fp = fopen("C:/Users/Dominik/Cworkspace/tmp/DB.txt", "r");
+	//fp = fopen("C:/Users/Dominik/Cworkspace/tmp/DB.txt", "r");
 
 	while(!(fgets(buff, 255, (FILE*) fp) == NULL))
 	{
+		sscanf(buff, "%c ", &c);
+		if(c=='S')
+		{
 
-
-
+			s->sList = buff;
+		}
+		else if(c=='T')
+		{
+			s->tList = buff;
+		}
+		else if(c=='C')
+		{
+			s->cList = buff;
+		}
+		else if(c=='A')
+		{
+			s->aList = buff;
+		}
+		else if(c=='E')
+		{
+			s->eList = buff;
+		}
 		/*
 		sscanf(buff, "%c %s %s", &c, number, name);
 		printf("%c %s %s\n", c, number, name);

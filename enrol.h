@@ -8,8 +8,7 @@
 #ifndef ENROL_H_
 #define ENROL_H_
 
-#include "person.h"
-#include "course.h"
+#include "model.h"
 
 typedef struct enrol{
 	char type;
