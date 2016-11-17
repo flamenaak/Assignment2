@@ -130,18 +130,22 @@ node_t* findCbyNum(char cNum[], dbreader_t* db) {
 	return 0;
 }
 
-int removeStudent(char snum[], dbreader_t*db) {
+int removeStudent(char snum[], dbreader_t*db)
+{
 	node_t*cur = db->sList;
 	int i = 0;
 	while (cur != 0) {
-		if (cur->element != 0) {
+		if (cur->element != 0)
+		{
 			person_t*p = (person_t*) cur->element;
 			if (strcmp(p->number, snum)==0) {
 				removeFromList(i, db->sList);
 				return 1;
 			}
 		}
+		cur = cur->next;
 		i++;
+
 	}
 	return 0;
 }

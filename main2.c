@@ -10,7 +10,8 @@
 
 int main() {
 	FILE *fp;
-	fp = fopen("D:/ICTengineering/EclipseProjects3C/Assignment2/db.txt", "r");
+	printf("Loading file\n");
+	fp = fopen("C:/Users/Dominik/Cworkspace/tmp/DB.txt", "r");
 
 	dbreader_t* db = newDBReader(fp);
 
