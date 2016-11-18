@@ -84,12 +84,12 @@ int main() {
 		printf("no list item h");
 //-----------------------------------------------------------------------//
 
-	//findSbyCourse works probably
+	//findSbyCourse works
 	node_t* sList1 = (node_t*)findStudentsByCourse("11", db);
 	printf("found %d students one of them is head\n", listSize(sList1));
 
 //--------------------------------------------------------------------//
-	//findTbyCourse
+	//findTbyCourse works
 	node_t* sList2 = (node_t*)findTeachersByCourse("31", db);
 	printf("found %d teachers one of them is head\n", listSize(sList2));
 

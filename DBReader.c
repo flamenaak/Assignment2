@@ -189,10 +189,10 @@ node_t* findStudentsByCourse(char Cnum[], dbreader_t* db)
 
 node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
 {
-	node_t* node = (node_t*) findCbyNum(Cnum, db);
-  course_t*cour = (course_t*)node->next->element;
-  node_t* cur = db->aList;
-  node_t* tempList = newNode();
+	node_t* node = (node_t*)findCbyNum(Cnum, db);
+	course_t*cour = node->element;
+	node_t* cur = db->aList;
+	node_t* tempList = newNode();
 
   if(cour == 0)
   {
@@ -206,10 +206,10 @@ node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
       if(cur->element != 0)
       {
         //compare and add to the tempList
-        enrol_t* a = (enrol_t*)cur->element;
-        if(strcmp(cour->course_number, a->course_number)==0)
+        enrol_t* e = (enrol_t*)cur->element;
+        if(strcmp(cour->course_number, e->course_number)== 0)
         {
-        person_t* per = (person_t*)findTbyNum(a->person_number, db)->element;
+        	person_t* per = (person_t*)findTbyNum(e->person_number, db)->element;
           addToList(tempList, per);
         }
 
@@ -218,6 +218,7 @@ node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
     }
     return tempList;
   }
+  return 0;
 }
 
 node_t* findSbyNum(char number[], dbreader_t* db){
