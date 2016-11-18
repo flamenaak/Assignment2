@@ -6,8 +6,8 @@
  */
 
 #include "enrol.h"
-
 enrol_t* enrol(person_t* person, course_t* course);
+
 
 enrol_t* enrol(person_t* person, course_t* course) {
 	if(person == 0 || course == 0)
