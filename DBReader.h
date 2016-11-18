@@ -28,7 +28,8 @@ int removeStudent(char snum[], dbreader_t*db);
 node_t* findTeachersByCourse(char Cnum[], dbreader_t* db);
 node_t* findStudentsByCourse(char Cnum[], dbreader_t* db);
 node_t* findSbyName(char name[], dbreader_t* db);
-person_t* findSbyNum(char num[], dbreader_t* db);
+node_t* findSbyNum(char number[], dbreader_t* db);
+node_t* findTbyNum(char number[], dbreader_t* db);
 
 #endif /* DBREADER_H_ */
 

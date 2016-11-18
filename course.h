@@ -13,7 +13,7 @@
 typedef struct course{
 	char type;
 	char name[10];
-	char course_number[2];
+	char course_number[3];
 	char semester_number;
 }course_t;
 

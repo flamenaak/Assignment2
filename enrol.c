@@ -20,3 +20,11 @@ enrol_t* enrol(person_t* person, course_t* course) {
 		enrol->type = 'E';
 	return enrol;
 }
+
+enrol_t* newEnrol(char *t, char person[], char course[]){
+	enrol_t* enrol = (enrol_t*)malloc(sizeof(enrol_t));
+	enrol->type = t;
+	strcpy(enrol->course_number, course);
+	strcpy(enrol->person_number, person);
+	return enrol;
+}

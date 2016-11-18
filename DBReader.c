@@ -43,12 +43,14 @@ dbreader_t* newDBReader(FILE *fp) {
 			addToList(db->cList, course);
 		} else if (c == 'A') {
 			sscanf(buff, "%c %s %s", &c, numberP, numberC);
-			enrol_t *teacherE = enrol(numberP, numberC);
+			enrol_t *teacherE = newEnrol(c,numberP, numberC);
 			addToList(db->aList, teacherE);
+			printf("adding enrol %c %s %s \n", teacherE->type, teacherE->person_number, teacherE->course_number);
 		} else if (c == 'E') {
 			sscanf(buff, "%c %s %s", &c, numberP, numberC);
-			enrol_t *studentE = enrol(numberP, numberC);
+			enrol_t *studentE = newEnrol(c,numberP, numberC);
 			addToList(db->eList, studentE);
+			printf("adding enrol %c %s %s \n", studentE->type, studentE->person_number, studentE->course_number);
 		}
 		/*
 		 sscanf(buff, "%c %s %s", &c, number, name);
@@ -67,54 +69,63 @@ node_t* findSbyName(char name[], dbreader_t* db) {
 	while (cur != 0) {
 		if (cur->element != 0) {
 			person_t *p = (person_t*) cur->element;
-			if (p->first_name == name)
+			if (strcmp(p->first_name, name)==0)
 				return cur;
 		}
+		cur = cur-> next;
 	}
 	return 0;
 }
 
 node_t* findCbySNum(char stNum[], dbreader_t* db) {
-	node_t*cur = db->eList;
-	enrol_t *p;
+	node_t*cur = (node_t*)db->eList;
 	node_t* list = newNode();
 
 	while (cur != 0) {
 		if (cur->element != 0) {
-			p = (enrol_t*) cur->element;
-			if (p->person_number == stNum && p->type == 'E')
-				addToList(list, findCbyNum(p->course_number, db));
+			enrol_t *p = (enrol_t*)cur->element;
+			if (strcmp(p->person_number, stNum)==0){
+				//printf("found enrol with sNum %s and cNum %s \n", p->person_number , p->course_number);
+				node_t* node = (node_t*)findCbyNum(p->course_number, db);
+				course_t* c = (course_t*)node->element;
+				addToList(list, c);
+			}
 		}
+		cur = cur->next;
 	}
 	return list;
 }
 
 node_t* findCbyTNum(char stNum[], dbreader_t* db) {
+	node_t*cur = (node_t*)db->aList;
 	node_t* list = newNode();
-
-	node_t*cur = db->eList;
-	enrol_t *p;
 
 	while (cur != 0) {
 		if (cur->element != 0) {
-			p = (enrol_t*) cur->element;
-			if (p->person_number == stNum && p->type == 'A')
-				addToList(list,findCbyNum(p->course_number, db));
+			enrol_t *p = (enrol_t*)cur->element;
+			if (strcmp(p->person_number, stNum)==0){
+				//printf("found enrol with sNum %s and cNum %s \n", p->person_number , p->course_number);
+				node_t* node = (node_t*)findCbyNum(p->course_number, db);
+				course_t* c = (course_t*)node->element;
+				addToList(list, c);
+				}
 		}
+		cur = cur->next;
 	}
 	return list;
 }
 
 node_t* findCbyNum(char cNum[], dbreader_t* db) {
-	node_t*cur = db->cList;
+	node_t*cur = (node_t*)db->cList;
 	course_t*c;
 
 	while (cur != 0) {
 		if (cur->element != 0) {
 			c = (course_t*) cur->element;
-			if (c->course_number == cNum)
+			if (strcmp(c->course_number, cNum) == 0)
 				return cur;
 		}
+		cur = cur->next;
 	}
 	return 0;
 }
@@ -125,7 +136,7 @@ int removeStudent(char snum[], dbreader_t*db) {
 	while (cur != 0) {
 		if (cur->element != 0) {
 			person_t*p = (person_t*) cur->element;
-			if (p->number == snum) {
+			if (strcmp(p->number, snum)==0) {
 				removeFromList(i, db->sList);
 				return 1;
 			}
@@ -137,16 +148,17 @@ int removeStudent(char snum[], dbreader_t*db) {
 
 void enrolStudent(person_t*person, course_t*course, dbreader_t* db)
 {
-	enrol_t*e = enrol(person, course);
+	enrol_t*e = (enrol_t*)enrol(person, course);
 	if(person->number!= 0 && course->course_number != 0)
 	addToList((node_t*)db->eList,e);
 }
 
 node_t* findStudentsByCourse(char Cnum[], dbreader_t* db)
 {
-  course_t*cour = findCbyNum(Cnum, db);
-  node_t* cur = db->eList;
-  node_t* tempList = newNode();
+	node_t* node = (node_t*)findCbyNum(Cnum, db);
+	course_t*cour = node->element;
+	node_t* cur = db->eList;
+	node_t* tempList = newNode();
 
   if(cour == 0)
   {
@@ -161,12 +173,14 @@ node_t* findStudentsByCourse(char Cnum[], dbreader_t* db)
       {
         //compare and add to the tempList
         enrol_t* e = (enrol_t*)cur->element;
-        if(cour->course_number == e->course_number)
+        if(strcmp(cour->course_number, e->course_number)== 0)
         {
-          addToList(tempList, findSbyNum(e->person_number, db));
+        	person_t* per = (person_t*)findSbyNum(e->person_number, db)->element;
+          addToList(tempList, per);
         }
 
       }
+      cur = cur->next;
     }
     return tempList;
   }
@@ -175,7 +189,8 @@ node_t* findStudentsByCourse(char Cnum[], dbreader_t* db)
 
 node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
 {
-  course_t*cour = findCbyNum(Cnum, db);
+	node_t* node = (node_t*) findCbyNum(Cnum, db);
+  course_t*cour = (course_t*)node->next->element;
   node_t* cur = db->aList;
   node_t* tempList = newNode();
 
@@ -192,28 +207,43 @@ node_t* findTeachersByCourse(char Cnum[], dbreader_t* db)
       {
         //compare and add to the tempList
         enrol_t* a = (enrol_t*)cur->element;
-        if(cour->course_number == a->course_number)
+        if(strcmp(cour->course_number, a->course_number)==0)
         {
-          addToList(tempList, findSbyNum(a->person_number, db));
+        person_t* per = (person_t*)findTbyNum(a->person_number, db)->element;
+          addToList(tempList, per);
         }
 
       }
+      cur = cur->next;
     }
     return tempList;
   }
-  return 0;
 }
 
-person_t* findSbyNum(char number[], dbreader_t* db){
+node_t* findSbyNum(char number[], dbreader_t* db){
 	node_t* cur = db->sList;
 	while(cur != 0){
 		if(cur->element != 0)
 		{
 			person_t*p = (person_t*)cur->element;
-			if(p->number == number)
-				return p;
-			cur = cur->next;
+			if(strcmp(p->number, number)==0)
+				return cur;
 		}
+		cur = cur->next;
+	}
+	return 0;
+}
+
+node_t* findTbyNum(char number[], dbreader_t* db){
+	node_t* cur = db->tList;
+	while(cur != 0){
+		if(cur->element != 0)
+		{
+			person_t*p = (person_t*)cur->element;
+			if(strcmp(p->number, number)==0)
+				return cur;
+		}
+		cur = cur->next;
 	}
 	return 0;
 }

@@ -13,7 +13,7 @@
 typedef struct person{
 	char type;
 	char first_name[20];
-	char number[6];
+	char number[7];
 
 } person_t;
 person_t* newStudent(char name[], char number[]);
