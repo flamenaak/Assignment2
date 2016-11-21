@@ -94,4 +94,17 @@ int main() {
 	node_t* sList2 = (node_t*)findTeachersByCourse("31", db);
 	printf("found %d teachers one of them is head\n", listSize(sList2));
 
+
+//--------------------------------------------------------------------//
+
+	//removeStudent works
+	node_t* sl = db->sList;
+	printf("students: %d (one is head)\n", listSize(sl));
+	removeStudent("123456", db);
+	printf("students after removing: %d (one is head)\n", listSize(sl));
+
+//--------------------------------------------------------------------//
+	//enrol
+
+
 }
