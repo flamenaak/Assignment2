@@ -18,20 +18,24 @@ int main() {
 	printf("%d\n", listSize(db->aList));
 //--------------------------------------------------------//
 	// findSbyName works
-	node_t* s = findSbyName("Ivan", db);
+	node_t* s = findSbyName("Nudla", db);
 	if (s == 0)
-		printf("err");
+		printf("err name not exist\n");
 
-	person_t * p = s->element;
-	if (p != 0)
+	person_t * p;
+	if (s != 0) {
+		p = s->element;
 		printf("%c %s %s \n", p->type, p->number, p->first_name);
+	}
 
 	s = findSbyName("Georgi", db);
 	if (s == 0)
-		printf("err");
-	p = s->element;
-	if (p != 0)
+		printf("err name not exist\n");
+
+	if (p != 0) {
+		p = s->element;
 		printf("%c %s %s \n", p->type, p->number, p->first_name);
+	}
 	//----------------------------------------------------------------------//
 	//findSbyNum works
 	node_t* st = findSbyNum("123456",db);

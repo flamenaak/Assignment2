@@ -45,12 +45,10 @@ dbreader_t* newDBReader(FILE *fp) {
 			sscanf(buff, "%c %s %s", &c, numberP, numberC);
 			enrol_t *teacherE = newEnrol(c,numberP, numberC);
 			addToList(db->aList, teacherE);
-			printf("adding enrol %c %s %s \n", teacherE->type, teacherE->person_number, teacherE->course_number);
 		} else if (c == 'E') {
 			sscanf(buff, "%c %s %s", &c, numberP, numberC);
 			enrol_t *studentE = newEnrol(c,numberP, numberC);
 			addToList(db->eList, studentE);
-			printf("adding enrol %c %s %s \n", studentE->type, studentE->person_number, studentE->course_number);
 		}
 		/*
 		 sscanf(buff, "%c %s %s", &c, number, name);
@@ -74,6 +72,7 @@ node_t* findSbyName(char name[], dbreader_t* db) {
 		}
 		cur = cur-> next;
 	}
+
 	return 0;
 }
 
