@@ -139,6 +139,7 @@ int removeStudent(char snum[], dbreader_t*db)
 			person_t*p = (person_t*) cur->element;
 			if (strcmp(p->number, snum)==0) {
 				removeFromList(i, db->sList);
+				removeAllStudentEnrols(snum , db);
 				return 1;
 			}
 		}
@@ -147,6 +148,23 @@ int removeStudent(char snum[], dbreader_t*db)
 
 	}
 	return 0;
+}
+
+void removeAllStudentEnrols(char snum[], dbreader_t* db){
+	node_t*cur = db->eList;
+		int i = 0;
+		while (cur != 0) {
+			if (cur->element != 0){
+				enrol_t*p = (enrol_t*) cur->element;
+				if (strcmp(p->person_number, snum)==0) {
+					removeFromList(i, db->eList);
+					removeAllStudentEnrols(snum, db);
+					return;
+				}
+			}
+			cur = cur->next;
+			i++;
+		}
 }
 
 void enrolStudent(person_t*person, course_t*course, dbreader_t* db)

@@ -7,11 +7,12 @@
 
 #include "model.h"
 #include "DBReader.h"
+#include <stdio.h>
 
 int main() {
 	FILE *fp;
 	printf("Loading file\n");
-	fp = fopen("C:/Users/Dominik/Cworkspace/tmp/DB.txt", "r");
+	fp = fopen("db.txt", "r");
 
 	dbreader_t* db = newDBReader(fp);
 
@@ -103,9 +104,12 @@ int main() {
 
 	//removeStudent works
 	node_t* sl = db->sList;
+	node_t* el = db->eList;
 	printf("students: %d (one is head)\n", listSize(sl));
+	printf("student enrols: %d (one is head)\n", listSize(el));
 	removeStudent("123456", db);
 	printf("students after removing: %d (one is head)\n", listSize(sl));
+	printf("student enrols after removing: %d (one is head)\n", listSize(el));
 
 //--------------------------------------------------------------------//
 	//enrol
